@@ -40,7 +40,6 @@ pyqtgraph==0.10.0
 pyserial==3.4
 PySimpleSOAP==1.16.2
 pysmbc==1.0.15.6
-python-apt==1.8.4
 python-dateutil==2.7.3
 python-debian==0.1.36
 python-debianbts==2.8.2
