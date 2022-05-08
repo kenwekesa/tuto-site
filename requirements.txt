@@ -17,7 +17,6 @@ keyring==18.0.1
 keyrings.alt==3.1.1
 kiwisolver==1.0.1
 lazy-object-proxy==1.6.0
-louis==3.0.0
 matplotlib==3.0.2
 mccabe==0.6.1
 numpy==1.16.5
