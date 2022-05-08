@@ -1,0 +1,1 @@
+web: gunicorn honorstutorial.wsgi --log-file -
