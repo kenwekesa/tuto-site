@@ -2,7 +2,6 @@ asgiref==3.4.1
 asn1crypto==0.24.0
 astroid==2.8.6
 dbus-python==1.2.12
-debtags==2.1
 decorator==4.3.0
 Django==3.2.10
 django-crispy-forms==1.14.0
