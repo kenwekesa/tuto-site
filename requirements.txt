@@ -1,3 +1,4 @@
+django-paypal==2.0
 appdirs==1.4.4
 asgiref==3.4.1
 beautifulsoup4==4.10.0
