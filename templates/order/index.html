@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block content %}
+
+
+             <!-- Navbar -->
+<!--
+    <div class="topnav  shadow" id="navContainer">
+        <div class="logoIcon">
+            <a href="#" class="navbar-brand">Honorstutorial</a>
+        </div>
+        <div class = "navlinks pull-right" id="myTopnav">
+            <a href="#home">Home</a>
+            <a href="#" >Place Order</a>
+            <a href="#">Recent Orders</a>
+           
+        </div>
+           
+
+
+        <a href="javascript:void(0);" class="icon mb-5" onclick="myFunction()">
+            <label class="menuIcon" id="menuIcon">&#9776;</label>
+        </a>
+  
+    </div>
+-->
+
+<nav>
+     <label class="logo">Honorstutorial</label>
+
+     <ul class="navlinks" id="navlinks_id">
+          <li><a href="#">Home</a> </li>
+          <li><a href="{% url 'placeorder' %}">Place Order</a> </li>
+          <li><a href="">Recent Orders</a> </li>
+     </ul>
+
+      <a href="javascript:void(0);" class="menuicon mb-5" onclick="myFunction()">
+            <label class="menuIcon" id="menuIcon">&#9776;</label>
+        </a>
+</nav>
+
+
+ <div
+      id="belownav_div"
+      class="belownav_div bg-light text-light text-sm-start "
+    >
+      <div class="container">
+        <div class=" news_title">
+          <div class="text_content">
+          <br />  <br/> <br/>  <br/> <br/>
+            <h1>This is the dummy heading here</h1>
+             <br/> <br/>
+            <p>This is a paragraph some roando  text for the destpkdkd lorem ipsum lorem sleo lorem ipsum lorem ipsum</p>
+             <br/> <br/>
+           
+          </div>
+          <div class="home_btns">
+               <a href="{% url 'placeorder' %}"><button class="place_order_btn">Place order</button></a>
+               <button class="recent_order_btn">Recent Orders</button>
+          </div>
+         
+        </div>
+         <div class = "overlay" id="overlay">     
+        </div>
+
+      </div>
+      
+    </div>
+   
+
+ <!-- Footer -->
+    <footer class="p-5 bg-dark text-white text-center position-relative">
+      <div class="container">
+        <p class="lead">Copyright &copy; Honorstutorial</p>
+
+        <a href="#" class="position-absolute bottom-0 end-0 p-5">
+          <i class="bi bi-arrow-up-circle h1"></i>
+        </a>
+      </div>
+    </footer>
+
+{% endblock %}

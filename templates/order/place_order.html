@@ -1,0 +1,138 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+<nav>
+     <label class="logo">Honorstutorial</label>
+
+     <ul class="navlinks" id="navlinks_id">
+          <li><a href="{% url 'homepage' %}">Home</a> </li>
+          <li><a href="">Place Order</a> </li>
+          <li><a href="">Recent Orders</a> </li>
+     </ul>
+
+      <a href="javascript:void(0);" class="menuicon mb-5" onclick="myFunction()">
+            <label class="menuIcon" id="menuIcon">&#9776;</label>
+        </a>
+</nav>
+
+
+<div class="placeorder_description">
+  <h1>Place an Order</h1>
+  <h5>Order and get quality, timely delivered paper, with competitive price.</h5>
+  </div>
+
+<div class="container py-5 create-form-box">
+  <!--{% if prod_form.errors %} ddddes: {% for error in prod_form.errors %}
+  <!--->
+  {{ error | escape }} {% endfor %} {% endif %} {% if inv_prod_form.errors %}
+  ddddes: {% for error in inv_prod_form.errors %}
+  <!--->
+  {{ error | escape }} {% endfor %} {% endif %} {% if form.errors %} ddddes:
+  {%for error in form.errors %}
+  <!--->
+  {{ error | escape }} {% endfor %} {% endif %}
+  -->
+  
+  <hr/>
+  <div class="row">
+    <form enctype="multipart/form-data" method="POST" class="col-md-12">
+
+
+        {% csrf_token %}
+        <h3>Personal Details</h3>
+
+        
+       <div class="row">
+        <div class="form-group col-md-6 col-sm-6">{{ client_form.first_name|as_crispy_field }}</div>
+        
+        <div class="form-group col-md-6 col-sm-6">
+          {{ client_form.last_name|as_crispy_field }}
+        </div>
+       </div>
+       <div class="row">
+        <div class="form-group col-md-6 col-sm-6">{{ client_form.emailAddress|as_crispy_field }}</div>
+        
+        <div class="form-group col-md-6 col-sm-6">
+          {{ client_form.confirm_email|as_crispy_field }}
+        </div>
+       </div>
+       <br/>
+      <h3>Order Details</h3>
+      <br/>
+      <div class="row">
+            <div class="form-group col-md-4 col-sm-12">
+            {{ form.subject|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 col-sm-12">{{ form.deadline|as_crispy_field }}</div>
+            <div class="form-group col-md-4 col-sm-12">{{ form.prefered_format|as_crispy_field }}</div>
+       </div>
+       <br/>
+       <div class="row">
+            <div class="form-group col-md-3 col-sm-11">{{ form.number_of_sources|as_crispy_field }}</div>
+            <div class="form-group col-md-3 col-sm-11 ml-3">{{ form.number_of_pages|as_crispy_field }}</div>
+            <div class="form-group col-md-3 col-sm-11 ml-3">{{ form.powerpoint_slides|as_crispy_field }}</div>
+            <div class="form-group col-md-3 col-sm-11 ml-3">{{ form.prefered_spacing|as_crispy_field }}</div>
+        
+      </div>
+
+        <br/>  <br/>
+       <div class="row">
+              <div class="form-group col-9 ml-3">{{ form.topic|as_crispy_field }}</div>
+       </div>
+       <br/>
+      <div class="row">
+             <div class="form-group col-10">{{ form.assignment_details|as_crispy_field }}</div>
+      </div>
+
+              <br/>  <br/>
+       <div class="row">
+         <div class="form-group col-md-4 col-sm-9">{{ form.assignment_file|as_crispy_field }}</div>
+      </div>
+        <br />
+      <div class="row " style = "width: 100%">
+            <div class="form-group col-md-5 col-sm-9">{{ form.total_price|as_crispy_field }}</div>
+      </div>
+      <br />
+      <div class="row" style = "width: 100%">
+      <button class="btn btn-secondary col-md-5 col-sm-11 mr-1 previewpaby_btn" type="submit">Preview and Pay</button>
+      </div>
+
+      <div class="form-row">
+        <!-- collapsible form -->
+        <div class="col-12">
+        </div>
+        </div>
+
+     </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+ <!-- Footer -->
+    <footer class="p-5 bg-dark text-white text-center position-relative">
+      <div class="container">
+        <p class="lead">Copyright &copy; Honorstutorial</p>
+
+        <a href="#" class="position-absolute bottom-0 end-0 p-5">
+          <i class="bi bi-arrow-up-circle h1"></i>
+        </a>
+      </div>
+    </footer>
+
+
+    <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true,
+            format: 'DD.MM.YYYY' /*remove this line if you want to use time as well */
+        });
+    });
+</script>
+
+{% endblock %}

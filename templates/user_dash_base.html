@@ -1,0 +1,56 @@
+{% load static %}
+<!Doctype html>
+<html>
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HonorsTutorial</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type = "text/css" href="{% static 'css/admin.css' %}" >
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/main.css' %}" >
+
+    <style>
+
+            *{
+                padding:0;
+                margin:0;
+                box-sizing: border-box;
+                list-style-type: none;
+                text-decoration: none;
+            }
+            body::before
+            {
+                display: none;
+            }
+    </style>
+    </head>
+    <body>
+
+
+            <!-- Sidebar -->
+  <div class="sidebar">
+      <div class="sidebar-brand">
+        
+      </div>
+      <div class="sidebar-menu">
+
+          <ul>
+             <li><a class="active" href=""><span class="fa fa-home"></span> Home</a></a></li>
+          
+          </ul>
+      </div>
+  </div>
+  <!-- Sidebar -->
+  
+
+   {% block content %} {% endblock %}
+
+  <span class="fa fa-bar-chart "></span>
+    </body>
+</html>

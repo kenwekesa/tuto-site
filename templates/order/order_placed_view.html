@@ -1,0 +1,48 @@
+{% extends 'user_dash_base.html' %} {% load static %}
+{% block content %}
+<!--Main content-->
+  <div class="main-content">
+      <header>
+           <h3 class="mr-4"> 
+           <label>
+              <span class="fa fa-bars"></span>
+           </lable>
+           
+               HonorsTutorial
+           </h3>
+
+           
+
+           <div class="user-wrapper">
+               <!--<img src="images/crypto.jpg" height = "40" width="40" alt=""/>-->
+               
+           </div>
+      </header>
+
+     <div class="container mt-5">
+    <div class="main-body">
+    
+         
+          <!-- /Breadcrumb -->
+    
+          <div class="row gutters-sm">
+           
+            <div class="col-md-10">
+              <div class="card mb-3 pt-3 pb-3 pl-3 text-align-center">
+                    <div class="card-body">
+                         <h5>Assignment successfully submitted, our team is working on it, and you will get a reply to the same as soon as possible within the specified timelines. 
+                         Assignment Reference number is <span style="color:maroon; font-weight:bold">{{order.number}}</span></h5>
+                    </div>
+                 
+              </div>
+              
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+  {% endblock %}
