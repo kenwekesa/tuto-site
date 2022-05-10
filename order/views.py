@@ -127,8 +127,13 @@ def place_order_view(request):
             #messages.success(request, f'Order created successfully')
             request.session['order_data'] = json.dumps(form.cleaned_data, default=str)
             request.session['client_data'] = client_form.cleaned_data
+
+            client = client_form.save
+            form.client = client
+
+            orders = form.save
             
-            return render(request, 'order/review_order.html',{'order': form.cleaned_data, 'client': client_form.cleaned_data,'form':form,'client_form':client_form})
+            return render(request, 'order/review_order.html',{'orders':orders, 'order': form.cleaned_data, 'client': client_form.cleaned_data,'form':form,'client_form':client_form})
     
     else:
         form = OrderForm()
@@ -141,15 +146,15 @@ def place_order_view(request):
 
 
 
-def review_and_pay_view(request):
+def review_and_pay_view(request, slug):
     #context = {'posts': Post.objects.all()}
 
     #--------------------------------------------------
-   
+    order = Order.objects.get(slug = slug)
     order_data = json.loads(request.session['order_data'])
     client_data = request.session['client_data']
 
-    client=Client(first_name=client_data['first_name'],last_name=client_data['last_name'], emailAddress=client_data['emailAddress'])
+    """client=Client(first_name=client_data['first_name'],last_name=client_data['last_name'], emailAddress=client_data['emailAddress'])
     
     order =Order(assignment_file=order_data["assignment_file"], topic = order_data["topic"],subject=order_data['subject'],
     number_of_pages= order_data['number_of_pages'],powerpoint_slides=order_data['powerpoint_slides'],
@@ -157,7 +162,7 @@ def review_and_pay_view(request):
     
     client.save()
     order.save()
-    
+    """
     del request.session['order_data']
     del request.session['client_data']
    

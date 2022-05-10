@@ -12,7 +12,7 @@ urlpatterns = [
     path('place_order', mainviews.place_order_view, name="placeorder"),
     path('admin_dashboard', mainviews.admin_dash_view, name="admin-dashboard"),
     path('orders_view', mainviews.orders_view, name="view-orders"),
-    path('review_and_pay', mainviews.review_and_pay_view, name="review-and-pay"),
+    path('review_and_pay/<slug:slug>', mainviews.review_and_pay_view, name="review-and-pay"),
     path('view_order/<slug:slug>', mainviews.view_order_view, name="view-order"),
     path('order_placed/<slug:slug>', mainviews.order_placed_view, name="order-placed"),
 

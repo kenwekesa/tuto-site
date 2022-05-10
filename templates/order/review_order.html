@@ -46,7 +46,7 @@
                 <!-- Set up a container element for the button -->
                 <br/>
                  <div id="paypal-button-container"></div>
-                 <a class="btn btn-secondary mt-2 ml-2 mr-2 btn-sm col-md-12" id="make_order_btn"  href="{% url 'review-and-pay' %}">Submit</a>
+                 <a class="btn btn-secondary mt-2 ml-2 mr-2 btn-sm col-md-12" id="make_order_btn"  href="{% url 'review-and-pay' orders.slug %}">Submit</a>
               </div>
             
             </div>
@@ -55,7 +55,7 @@
                     <div class="card-body">
 
                     <div class="alert alert-warning" role="alert" id="pay_alert">
-                         <h3>Pay to place the order</h3>
+                         <h3>Pay, to complete your request.</h3>
                     </div>
                          
                     </div>
@@ -172,7 +172,7 @@
         // Render the PayPal button into #paypal-button-container
         var pay_alert = document.getElementById("pay_alert");
         var make_order_btn = document.getElementById("make_order_btn");
-        var amount_btn = document.getElementById("amount_btn");
+        var amount_btn = document.getElementById("amount_btn");   
       
         make_order_btn.style.display = "none";
         
