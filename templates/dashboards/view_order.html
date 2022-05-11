@@ -134,6 +134,25 @@
                     </div>
                   </div>
 
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Payment Status: </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                         {{order.payment_made}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Payment Transaction ID: </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                         {{order.payment_transaction_id}}
+                    </div>
+                  </div>
+
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
@@ -143,7 +162,8 @@
                          {{order.assignment_file}}
                     </div>
                     <div class="col-sm-3 text-secondary">
-                         <a class="btn btn-warning " target="__blank" href="{{order.assignment_file}}">download file</a>
+                         <a class="btn btn-warning " href="{{order.assignment_file.url}}" download><i class="fa fa-download"></i> download file</a>
+                          <img src ="{{order.assignment_file.url}}"/>
                     </div>
                   </div>
                   <hr>
@@ -155,7 +175,7 @@
                 <div class="col-sm-12 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h3 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Assignment Details</h3>
+                      <h3 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Assignment Details</h3>
                       <p>{{order.assignment_details}}
                     </div>
                   </div>

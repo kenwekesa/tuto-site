@@ -97,9 +97,12 @@ class Order(models.Model):
     prefered_spacing = forms.ChoiceField(choices=SPACING, widget=forms.RadioSelect)
     topic = models.CharField(null=True, blank=True, max_length=100)
     assignment_details = models.TextField(null=True, blank=True, max_length=600)
-    assignment_file = models.FileField(upload_to='documents/%Y/%m/%d')
+    assignment_file = models.FileField(upload_to='clientuploads')
 
     total_price = models.CharField(null=True, blank=True, max_length=100)
+
+    payment_transaction_id = models.CharField(null=True, blank=True, max_length=100)
+
 
 
     client = models.ForeignKey(
@@ -137,3 +140,33 @@ class Order(models.Model):
 
         super(Order, self).save(*args, **kwargs)
 
+class Assignmentfile(models.Model):
+    file_directory = models.FileField(upload_to='clientuploads')
+
+    # Related Fields
+    order = models.ManyToManyField(Order, through='OrderAssignmentfile')
+
+    # Utility fields
+    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    last_updated = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.file_directory)
+
+    """def get_absolute_url(self):
+        return reverse('product-detail', kwargs={'slug': self.slug})"""
+
+    def save(self, *args, **kwargs):
+        if self.date_created is None:
+            self.date_created = timezone.localtime(timezone.now())
+        if self.uniqueId is None:
+            self.uniqueId = str(uuid4()).split('-')[4]
+            self.slug = slugify('{} {}'.format(
+                self.file_directory, self.uniqueId))
+
+        self.slug = slugify('{} {}'.format(self.file_directory, self.uniqueId))
+        self.last_updated = timezone.localtime(timezone.now())
+
+        super(Assignmentfile, self).save(*args, **kwargs)

@@ -46,7 +46,7 @@
                 <!-- Set up a container element for the button -->
                 <br/>
                  <div id="paypal-button-container"></div>
-                 <a class="btn btn-secondary mt-2 ml-2 mr-2 btn-sm col-md-12" id="make_order_btn"  href="{% url 'review-and-pay' orders.slug %}">Submit</a>
+                 <a class="btn btn-secondary mt-2 ml-2 mr-2 btn-sm col-md-12" id="make_order_btn" href="{% url 'review-and-pay' order.slug %}">Submit</a>
               </div>
             
             </div>
@@ -199,6 +199,7 @@
                     //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
                     // Replace the above to show a success message within this page, e.g.
+                    updatePayment(1,transaction.id)
                     const element = document.getElementById('paypal-button-container');
                     element.innerHTML = '';
                     element.innerHTML = '<h3>Thank you for your payment!</h3>';
@@ -212,6 +213,31 @@
 
 
         }).render('#paypal-button-container');
+
+
+
+        function updatePayment(paymentflag,transactionID) 
+        {
+           
+            $.ajax({
+             url: "{% url 'update-payment' %}",
+             method : 'POST',
+             data: {
+               slug: "{{order.slug}}",
+               flag: paymentflag,
+               transaction_id : transactionID
+             },
+            
+             success: function(response) {
+
+              console.log(response)
+              }
+              }); return false;
+
+
+
+}
+        
     </script>
 
   {% endblock %}

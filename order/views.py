@@ -1,12 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from .forms import OrderForm, ClientForm
+from .forms import OrderForm, ClientForm, AssignmentfileFormSet, AssignmentfileEditFormSet
 from django.contrib import messages
-from .models import Order, Client
+from .models import Order, Client, OrderAssignmentfile
 
 from django.contrib.auth.forms import AuthenticationForm #add this
 from django.contrib.auth import login, authenticate
+
+
+from django.views.decorators.csrf import csrf_exempt 
+
+from django.http import HttpResponse
+
+from django.forms.formsets import formset_factory
 
 import json
 # Create your views here.
@@ -121,6 +128,8 @@ def place_order_view(request):
      
         form = OrderForm(request.POST, request.FILES)
         client_form = ClientForm(request.POST)
+
+        assignmentfile_formset = AssingmentfileFormSet(request.POST)
        
         if form.is_valid() and client_form.is_valid():
             
@@ -128,20 +137,22 @@ def place_order_view(request):
             request.session['order_data'] = json.dumps(form.cleaned_data, default=str)
             request.session['client_data'] = client_form.cleaned_data
 
-            client = client_form.save
+            client = client_form.save()
+            
             form.client = client
 
-            orders = form.save
+            order = form.save()
             
-            return render(request, 'order/review_order.html',{'orders':orders, 'order': form.cleaned_data, 'client': client_form.cleaned_data,'form':form,'client_form':client_form})
+            return render(request, 'order/review_order.html',{'order':order, 'client': client})
     
     else:
         form = OrderForm()
         client_form=ClientForm()
+        assignmentfile_formset = AssignmentfileFormSet()
        
 
     
-    return render(request=request, template_name="order/place_order.html", context={"form":form, "client_form": client_form})
+    return render(request=request, template_name="order/place_order.html", context={"assignmentfile_formset": assignmentfile_formset, "form":form, "client_form": client_form})
     #---------------------------------------------------
 
 
@@ -233,3 +244,18 @@ def search_orders_by_name(request):
 
 		return render(request, 'order/search_results.html', {"orders": orders})
 
+
+
+
+
+@csrf_exempt
+def update_payment(request):
+     if request.method =='POST':
+         slug = request.POST['slug']
+         payment_flag = request.POST['flag']
+         transaction_id = request.POST['transaction_id']
+         order = Order.objects.get(slug=slug)
+         order.payment_made = payment_flag
+         order.payment_transaction_id = transaction_id
+         order.save()
+         return HttpResponse('Payment Updated')

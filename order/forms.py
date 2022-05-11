@@ -41,12 +41,12 @@ class OrderForm(forms.ModelForm):
         ('Double Spaced','Double spaced')
        
     ]
-    number_of_sources = forms.IntegerField(label="Number of Sources" )
-    number_of_pages = forms.IntegerField(label="Number of pages")
-    powerpoint_slides = forms.CharField(label="Powerpoint Slides")
+    number_of_sources = forms.IntegerField(label="Number of Sources", min_value=0 )
+    number_of_pages = forms.IntegerField(label="Number of pages", min_value=0)
+    powerpoint_slides = forms.IntegerField(label="Powerpoint Slides", required=False,min_value=0)
     prefered_spacing = forms.ChoiceField(choices=SPACING, widget=forms.RadioSelect)
     assignment_details = forms.Textarea()
-    assignment_file = forms.FileField(label='Assignment File')
+    assignment_file = forms.FileField(label='Assignment File', required=False)
 
     total_price = forms.CharField(
                     required=True,
@@ -165,3 +165,22 @@ class ClientForm(forms.ModelForm):
         super(ClientForm, self).clean()
 
         
+class OrderAssignmentfileForm(forms.ModelForm):
+
+    class Meta:
+        model = OrderAssignmentfile
+        fields = ['file_directory']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+
+
+AssignmentfileFormSet = formset_factory(
+    OrderAssignmentForm, extra=1
+)
+
+AssignmentfileEditFormSet = modelformset_factory(
+    OrderAssignmentfile, form=OrderAssignmentfileForm, extra=0
+)

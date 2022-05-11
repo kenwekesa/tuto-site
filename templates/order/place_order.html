@@ -101,6 +101,47 @@
       <button class="btn btn-secondary col-md-5 col-sm-11 mr-1 previewpaby_btn" type="submit">Preview and Pay</button>
       </div>
 
+
+      <div class="row">
+
+                
+      <div class="table">
+                        <table class="table" id="formtable">
+			 	{{assignmentfile_formset.management_form}}
+                
+             			 
+                            <tr>
+                               
+                                	<td style="border: 0; padding: 0 0 0 0.5em; width: 49%">
+                                    <label class="form-label" for="invoice_detail_amount">Description</label>
+                  
+                                </td>
+                                <td style="border: 0; padding: 0 0 0 0.5em;">
+                                  
+                                </td>
+                            </tr>
+                            {% for file_form in assignmenttfile_formset %}
+                            
+                            <tr class="tablerow">
+                                <td style="border: 0; padding: 0 0.5em 0 0; width: 15%">
+                                  
+                                     {{ file_form.file_directory|as_crispy_field }}
+                                </td>
+                                
+                           
+                            </tr>
+                             {% endfor %}
+                            <tr class="add-btn-div">
+                              <td><input type='button' id='add-form' value='Add file' class="btn btn-secondary" /></td>
+                            </tr>
+                         
+                        </table>
+	
+   
+          </div>
+
+      </div>
+
       <div class="form-row">
         <!-- collapsible form -->
         <div class="col-12">
@@ -135,4 +176,57 @@
     });
 </script>
 
+
+<script>
+        let birdForm = document.querySelectorAll(".tablerow")
+        let container = document.querySelector("#formtable")
+        let addButton = document.querySelector("#add-form")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+        let addButtonDiv = document.querySelector(".add-btn-div")
+        let rowCount = document.getElementById('formtable').rows.length-1;
+
+	     var parentDiv = addButtonDiv.parentNode;
+
+        let formNum = birdForm.length-1
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = birdForm[0].cloneNode(true)
+            let formRegex = RegExp(`form-(\\d){1}-`,'g')
+
+            formNum++
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+            let nnn = addButtonDiv
+            parentDiv.insertBefore(newForm, addButtonDiv)
+           
+            
+            totalForms.setAttribute('value', `${formNum+1}`)
+        }
+
+	function deleteRow(r) {
+
+      var i = r.parentNode.parentNode.rowIndex;
+      var total = parseInt($('#id_form-TOTAL_FORMS').val());
+      if (total > 1) {
+          var i = r.parentNode.parentNode.rowIndex;
+          document.getElementById("formtable").deleteRow(i);
+          totalForms.setAttribute('value', `${formNum-1}`)
+        }
+
+      }
+
+      function updateForms() {
+    let bForm = document.querySelectorAll(".tablerow")
+    let count = 0;
+    for (let form of bForm) {
+        const formRegex = RegExp(`form-(\\d){1}-`, 'g');
+        form.innerHTML = form.innerHTML.replace(formRegex, `form-${count++}-`)
+        
+    }
+      }
+
+    
+    </script>
 {% endblock %}
